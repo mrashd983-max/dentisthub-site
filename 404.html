@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dentist Hub</title>
+<meta name="theme-color" content="#0E1416">
+<link rel="icon" href="/img/icon.png">
+<link rel="stylesheet" href="/site.css">
+<script src="/site.js"></script>
+<style>
+  .center { min-height: calc(100vh - 64px); display: grid; place-items: center; padding: 32px 16px; }
+  .box { width: 100%; max-width: 460px; }
+  .box .card { padding: 28px; }
+  .brand { color: var(--mint); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 13px; }
+  .box h1 { font-size: 28px; margin: 6px 0 10px; unicode-bidi: plaintext; }
+  .box p { color: var(--muted); }
+  .box .btn { width: 100%; justify-content: center; margin-top: 8px; }
+  html[lang=ar] .brand { letter-spacing: 0; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="mark" href="/">DENTIST<b>HUB</b></a>
+  <button class="lang" data-lang-toggle type="button"><span lang="en">العربية</span><span lang="ar">English</span></button>
+</div></header>
+<main class="center"><div class="box">
+
+  <!-- Product links from share cards and QR codes: dentisthub.net/p/<product id>.
+       GitHub Pages serves this page for every unknown address. Nothing is tracked. -->
+  <div class="card" id="product" hidden>
+    <div class="brand" id="brand"></div>
+    <h1 id="name"><span lang="en">Dental material</span><span lang="ar">منتج سني</span></h1>
+    <p><span lang="en">Step-by-step instructions from the maker's leaflet, with timers, in the Dentist Hub app.</span><span lang="ar">خطوات الاستخدام من نشرة الشركة المصنّعة، مع المؤقتات، في تطبيق Dentist Hub.</span></p>
+    <a class="btn primary" id="open" href="app.dentisthub://open/"><span lang="en">Open in Dentist Hub</span><span lang="ar">افتح في Dentist Hub</span></a>
+    <a class="btn" href="https://apps.apple.com/app/id6832690098">App Store</a>
+    <a class="btn" href="https://play.google.com/store/apps/details?id=app.dentisthub.dentist_hub">Google Play</a>
+    <p style="font-size:14px;margin-top:18px"><span lang="en">For dental professionals. Always follow the maker's instructions.</span><span lang="ar">للمختصين في طب الأسنان. اتبع دائمًا تعليمات الشركة المصنّعة.</span></p>
+  </div>
+
+  <div class="card" id="missing">
+    <h1><span lang="en">Page not found</span><span lang="ar">الصفحة غير موجودة</span></h1>
+    <p><span lang="en">This address doesn't exist on Dentist Hub.</span><span lang="ar">هذا العنوان غير موجود على Dentist Hub.</span></p>
+    <a class="btn primary" href="/"><span lang="en">Go to the home page</span><span lang="ar">الذهاب إلى الصفحة الرئيسية</span></a>
+  </div>
+</div></main>
+<script>
+  var m = location.pathname.match(/^\/p\/([a-z0-9-]{2,120})\/?$/);
+  if (m) {
+    var id = m[1];
+    document.getElementById('missing').hidden = true;
+    document.getElementById('product').hidden = false;
+    document.getElementById('open').href = 'app.dentisthub://open/product/' + id;
+    fetch('/products.json').then(function (r) { return r.json(); }).then(function (all) {
+      var p = all[id];
+      if (!p) return;
+      document.getElementById('brand').textContent = p[0];
+      document.getElementById('name').textContent = p[1];
+      document.title = p[0] + ' ' + p[1] + ' · Dentist Hub';
+    }).catch(function () {});
+  }
+</script>
+</body>
+</html>

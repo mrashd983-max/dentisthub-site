@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.dentisthub.dentist_hub",
+      "sha256_cert_fingerprints": [
+        "17:A6:FD:F5:61:25:AB:96:D3:95:E3:35:FE:07:56:C3:61:55:04:E3:0C:5E:94:34:1F:78:4F:CC:05:08:BB:A7"
+      ]
+    }
+  }
+]
