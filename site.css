@@ -14,7 +14,7 @@ body {
 html[lang=en] body [lang=ar], html[lang=ar] body [lang=en] { display: none !important; }
 a { color: var(--mint); text-decoration: none; }
 a:hover { text-decoration: underline; }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
 
 /* Header */
